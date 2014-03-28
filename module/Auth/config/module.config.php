@@ -1,11 +1,45 @@
 <?php
-return array(
-//	'static_salt' => 'aFGQ475SDsdfsaf2342', // I am going to move it to global.php. It should be accessable everywhere
+
+ return array(
+     'controllers' => array(
+         'invokables' => array(
+             'Auth\Controller\Auth' => 'Auth\Controller\AuthController',
+         ),
+     ),
+     
+      // The following section is new and should be added to your file
+     'router' => array(
+         'routes' => array(
+             'auth' => array(
+                'type'    => 'segment',
+                'options' => array(
+                     'route'    => '/auth[/][:action][/:id]',
+                     'constraints' => array(
+                         'action'  => '[a-zA-Z][a-zA-Z0-9_-]*',
+                         'id'      => '[0-9]+',
+                     ),
+                     'defaults' => array(
+                         'controller' => 'Auth\Controller\Auth',
+                         'action'     => 'auth',
+                     ),
+                 ),
+             ),
+         ),
+     ),
+
+     'view_manager' => array(
+         'template_path_stack' => array(
+             'auth' => __DIR__ . '/../view',
+         ),
+     ),
+ );
+
+
+/*
+ return array(
 	'controllers' => array(
         'invokables' => array(
-            'Auth\Controller\Index' => 'Auth\Controller\IndexController',	
-            'Auth\Controller\Registration' => 'Auth\Controller\RegistrationController',	
-            'Auth\Controller\Admin' => 'Auth\Controller\AdminController',	
+            'Auth\Controller\Index' => 'Auth\Controller\IndexController',		
         ),
 	),
     'router' => array(
@@ -59,4 +93,4 @@ return array(
 			'my_auth_service' => 'Zend\Authentication\AuthenticationService',
 		),
 	),
-);
+); */

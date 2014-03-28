@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 27, 2014 at 03:55 PM
+-- Generation Time: Mar 28, 2014 at 05:38 PM
 -- Server version: 5.5.35
--- PHP Version: 5.3.10-1ubuntu3.9
+-- PHP Version: 5.3.10-1ubuntu3.10
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `answer` (
   `answer` text NOT NULL,
   `likes` int(10) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `answer`
@@ -69,7 +69,31 @@ INSERT INTO `answer` (`id`, `quesid`, `answer`, `likes`) VALUES
 (4, 8, 'fdfd', 1),
 (5, 2, 'dsfdf', 1),
 (6, 2, 'sfdfdf', 1),
-(7, 2, 'fdfdsf', 1);
+(7, 2, 'fdfdsf', 1),
+(8, 2, 'hghn', 1),
+(9, 9, 'xgfhgf', 1),
+(10, 9, 'vgcbgvb', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `auth`
+--
+
+CREATE TABLE IF NOT EXISTS `auth` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `username` varchar(45) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `password` char(128) NOT NULL,
+  KEY `id` (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `auth`
+--
+
+INSERT INTO `auth` (`id`, `username`, `email`, `password`) VALUES
+(1, 'amit', 'amit@singsys.com', '5b722b307fce6c944905d132691d5e4a2214b7fe92b738920eb3fce3a90420a19511c3010a0e7712b054daef5b57bad59ecbd93b3280f210578f547f4aed4d25');
 
 -- --------------------------------------------------------
 
@@ -81,7 +105,7 @@ CREATE TABLE IF NOT EXISTS `forum` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `question` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 --
 -- Dumping data for table `forum`
@@ -95,7 +119,8 @@ INSERT INTO `forum` (`id`, `question`) VALUES
 (5, 'what to not ask?'),
 (6, 'Ask something?'),
 (7, 'sfsf'),
-(8, 'wdknsdkw');
+(8, 'wdknsdkw'),
+(9, 'hgfhgh');
 
 -- --------------------------------------------------------
 
