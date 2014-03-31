@@ -7,64 +7,93 @@ class RegistrationForm extends Form
 {
     public function __construct($name = null)
     {
-        parent::__construct('registration');
-        $this->setAttribute('method', 'post');
+        parent::__construct('auth');
 
         $this->add(array(
-            'name' => 'usr_name',
+            'name' => 'username',
             'attributes' => array(
                 'type'  => 'text',
+		'placeholder' => 'Username'
             ),
             'options' => array(
-                'label' => 'Username',
+               // 'label' => 'Username',
             ),
         ));
-		
-        $this->add(array(
-            'name' => 'usr_email',
+	
+	 $this->add(array(
+            'name' => 'fullname',
+            'attributes' => array(
+                'type'  => 'text',
+		'placeholder' => 'Fullname'
+            ),
+            'options' => array(
+               // 'label' => 'Full Name',
+            ),
+        ));
+	 
+	$this->add(array(
+            'name' => 'email',
             'attributes' => array(
                 'type'  => 'email',
+		'placeholder' => 'Email'
             ),
             'options' => array(
-                'label' => 'E-mail',
-            ),
-        ));	
-		
-        $this->add(array(
-            'name' => 'usr_password',
-            'attributes' => array(
-                'type'  => 'password',
-            ),
-            'options' => array(
-                'label' => 'Password',
+                
             ),
         ));
-		
+	 
         $this->add(array(
-            'name' => 'usr_password_confirm',
+            'name' => 'password',
             'attributes' => array(
                 'type'  => 'password',
+		'placeholder' => 'Password'
             ),
             'options' => array(
-                'label' => 'Confirm Password',
+                //'label' => 'Password',
             ),
-        ));	
-
-		$this->add(array(
-			'type' => 'Zend\Form\Element\Captcha',
-			'name' => 'captcha',
-			'options' => array(
-				'label' => 'Please verify you are human',
-				'captcha' => new \Zend\Captcha\Figlet(),
-			),
-		));
-		
+        ));
+	
+	   $this->add(array(
+            'name' => 'cpassword',
+            'attributes' => array(
+                'type'  => 'password',
+		'placeholder' => 'Confirm Password'
+            ),
+            'options' => array(
+                //'label' => 'Password',
+            ),
+        ));
+	   
+	$this->add(array(
+            'name' => 'dob',
+            'attributes' => array(
+                'type'  => 'text',
+		'placeholder' => 'Date of Birth',
+		'class'  => 'datepiker',
+            ),
+            'options' => array(
+                //'label' => 'Password',
+            ),
+        ));
+//        $this->add(array(
+//            'name' => 'rememberme',
+//			'type' => 'checkbox', // 'Zend\Form\Element\Checkbox',			
+////            'attributes' => array( // Is not working this way
+////                'type'  => '\Zend\Form\Element\Checkbox',
+////            ),
+//            'options' => array(
+//                'label' => 'Remember Me?',
+////				'checked_value' => 'true', without value here will be 1
+////				'unchecked_value' => 'false', // witll be 1
+//            ),
+//        ));			
         $this->add(array(
             'name' => 'submit',
             'attributes' => array(
                 'type'  => 'submit',
                 'value' => 'Go',
                 'id' => 'submitbutton',
+		'class' => 'btn btn-primary',
             ),
         )); 
     }

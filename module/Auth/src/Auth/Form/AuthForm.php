@@ -13,6 +13,7 @@ class AuthForm extends Form
             'name' => 'username',
             'attributes' => array(
                 'type'  => 'text',
+		'placeholder' => 'Username'
             ),
             'options' => array(
                 'label' => 'Username',
@@ -22,6 +23,7 @@ class AuthForm extends Form
             'name' => 'password',
             'attributes' => array(
                 'type'  => 'password',
+		'placeholder' => 'Password'
             ),
             'options' => array(
                 'label' => 'Password',
@@ -45,6 +47,7 @@ class AuthForm extends Form
                 'type'  => 'submit',
                 'value' => 'Go',
                 'id' => 'submitbutton',
+		'class' => 'btn btn-success',
             ),
         )); 
     }

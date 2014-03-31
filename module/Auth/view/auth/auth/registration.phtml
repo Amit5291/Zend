@@ -1,0 +1,53 @@
+<script type="text/javascript">
+    $(document).ready(function () {
+    /* assuming that text input datePicker would have id='datePicker' */
+    $( ".datePicker" ).datepicker({ dateFormat: 'dd/mm/yy' });
+
+});
+</script>
+ <?php
+ if(!isset($_SESSION['base']['username'])){
+    $registrationform->setAttribute('action', $this->url('auth', array('action' => 'registration')));
+    $registrationform->prepare();
+ ?> <h1>One Step away to see me !!</h1>  <?php   
+ echo $this->form()->openTag($registrationform);
+ ?>
+ <table>
+    <tr>
+        <td valign="top">Username:</td><td><?php echo $this->formRow($registrationform->get('username')); ?></td>
+    </tr>
+     <tr>
+        <td valign="top">Full Name:</td><td><?php echo $this->formRow($registrationform->get('fullname')); ?></td>
+    </tr>
+     <tr>
+        <td valign="top">Email:</td><td><?php echo $this->formRow($registrationform->get('email')); ?></td>
+    </tr>
+    <tr>
+        <td valign="top">Password:</td><td><?php echo $this->formRow($registrationform->get('password')); ?></td>
+    </tr>
+      <tr>
+        <td valign="top">Retype Password:</td><td><?php echo $this->formRow($registrationform->get('cpassword')); ?></td>
+    </tr>
+       <tr>
+        <td valign="top">DOB</td><td><?php echo $this->formRow($registrationform->get('dob')); ?></td>
+    </tr>
+    <tr>
+         <td></td><td><?php echo $this->formSubmit($registrationform->get('submit')); ?></td>
+    </tr>
+    <tr>
+        <td> Or <a href="<?php echo $this->url('auth',
+             array('action'=>''));?>">Sign In</a><br/></td>
+    </tr>
+ </table>
+ <?php  }else{
+      header('Cache-Control: max-age=900'); // to prevent document Expired
+      ?> <h1>You Can see me !!</h1> <?php
+     echo "<h2>Welcome ".$_SESSION['base']['username']."</h2>";
+    ?>
+    <a href="<?php echo $this->url('auth',
+             array('action'=>'dashboard'));?>">Check Your Details</a><br/>
+    
+     <a href="<?php echo $this->url('auth',
+             array('action'=>'logout'));?>">Log Out</a>
+    
+ <?php } ?>
