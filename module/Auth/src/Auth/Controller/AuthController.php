@@ -24,6 +24,7 @@ use Zend\Session\Container;
 class AuthController extends AbstractActionController
 {
 	protected $authTable = null;
+	protected $registrationTable = null;
  	
         public function authAction()
         { 
@@ -38,7 +39,7 @@ class AuthController extends AbstractActionController
 		
 		if($authform->isValid()){
 	
-		   $auth->exchangeArray($authform->getData());
+		    $auth->exchangeArray($authform->getData());
 		    $userdetail = $this->getAuthTable()->authauth($auth);
 		   // print_r($userdetail);
 		   //return array('userdetail' => $userdetail,'authform' => $authform);
@@ -80,7 +81,12 @@ class AuthController extends AbstractActionController
 		$registrationform->setData($request->getPost());
 		
 		if($registrationform->isValid()){
-			
+			 $registration->exchangeArray($registrationform->getData());
+			$result = $this->getRegistrationTable()->saveregistration($registration);
+			if($result){
+				return $this->redirect()->toRoute('auth');
+			}
+
 		}
 	     }
 	    return array('registrationform' => $registrationform);
@@ -100,6 +106,16 @@ class AuthController extends AbstractActionController
    
 	    }
 	    return $this->authTable;
+	}
+	
+	public function getRegistrationTable()
+	{
+	    if (!$this->registrationTable) {
+	       $sm = $this->getServiceLocator();
+	       $this->registrationTable = $sm->get('Auth\Model\RegistrationTable');
+   
+	    }
+	    return $this->registrationTable;
 	}
 	
 }

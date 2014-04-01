@@ -11,6 +11,9 @@ class Registration implements InputFilterAwareInterface
 {
     public $username;
     public $password;
+    public $fullname;
+    public $email;
+    public $dob;
     protected $inputFilter;
     
     public function exchangeArray($data) 
@@ -18,8 +21,10 @@ class Registration implements InputFilterAwareInterface
         $this->username = (!empty($data['username'])) ? $data['username'] : null;
         $this->fullname = (!empty($data['fullname'])) ? $data['fullname'] : null;
         $this->email = (!empty($data['email'])) ? $data['email'] : null;
-        $this->password = (!empty($data['password'])) ? $data['password'] : null;
+	$this->password = (!empty($data['password'])) ? $data['password'] : null;
 	$this->password = hash('sha512',$this->password);
+	$this->dob = (!empty($data['dob'])) ? $data['dob'] : null;
+	
     }
     
     public function getArrayCopy()
@@ -92,7 +97,7 @@ class Registration implements InputFilterAwareInterface
                  ),
              ));
                    
-             $inputFilter->add(array(
+             $pass = $inputFilter->add(array(
                  'name'     => 'password',
                  'required' => true,
                  'filters'  => array(
@@ -110,7 +115,7 @@ class Registration implements InputFilterAwareInterface
                      ),
                  ),
              ));
-              $inputFilter->add(array(
+             $cpass = $inputFilter->add(array(
                  'name'     => 'cpassword',
                  'required' => true,
                  'filters'  => array(
@@ -128,7 +133,25 @@ class Registration implements InputFilterAwareInterface
                      ),
                  ),
              ));
-
+	      
+	      $inputFilter->add(array(
+                 'name'     => 'dob',
+                 'required' => true,
+                 'filters'  => array(
+                     array('name' => 'StripTags'),
+                     array('name' => 'StringTrim'),
+                 ),
+                 'validators' => array(
+                     array(
+                         'name'    => 'StringLength',
+                         'options' => array(
+                             'encoding' => 'UTF-8',
+                             'min'      => 4,
+                             'max'      => 100,
+                         ),
+                     ),
+                 ),
+             ));
             $this->inputFilter = $inputFilter;
         }
 

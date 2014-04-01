@@ -22,7 +22,7 @@ class AuthTable
     public function authauth(Auth $auth)
     {
 	$data = array(
-             'username' => $auth->username,
+             'username'  => $auth->username,
              'password'  => $auth->password,
          );
 	$username = $data['username'];

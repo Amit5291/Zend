@@ -13,7 +13,8 @@ class RegistrationForm extends Form
             'name' => 'username',
             'attributes' => array(
                 'type'  => 'text',
-		'placeholder' => 'Username'
+		'placeholder' => 'Username',
+		'class' => 'form-control',
             ),
             'options' => array(
                // 'label' => 'Username',
@@ -24,7 +25,8 @@ class RegistrationForm extends Form
             'name' => 'fullname',
             'attributes' => array(
                 'type'  => 'text',
-		'placeholder' => 'Fullname'
+		'placeholder' => 'Fullname',
+		'class' => 'form-control',
             ),
             'options' => array(
                // 'label' => 'Full Name',
@@ -35,7 +37,8 @@ class RegistrationForm extends Form
             'name' => 'email',
             'attributes' => array(
                 'type'  => 'email',
-		'placeholder' => 'Email'
+		'placeholder' => 'Email',
+		'class' => 'form-control',
             ),
             'options' => array(
                 
@@ -46,7 +49,8 @@ class RegistrationForm extends Form
             'name' => 'password',
             'attributes' => array(
                 'type'  => 'password',
-		'placeholder' => 'Password'
+		'placeholder' => 'Password',
+		'class' => 'form-control',
             ),
             'options' => array(
                 //'label' => 'Password',
@@ -57,7 +61,8 @@ class RegistrationForm extends Form
             'name' => 'cpassword',
             'attributes' => array(
                 'type'  => 'password',
-		'placeholder' => 'Confirm Password'
+		'placeholder' => 'Confirm Password',
+		'class' => 'form-control',
             ),
             'options' => array(
                 //'label' => 'Password',
@@ -69,7 +74,8 @@ class RegistrationForm extends Form
             'attributes' => array(
                 'type'  => 'text',
 		'placeholder' => 'Date of Birth',
-		'class'  => 'datepiker',
+		'class'  => 'span2 datepicker form-control',
+
             ),
             'options' => array(
                 //'label' => 'Password',
