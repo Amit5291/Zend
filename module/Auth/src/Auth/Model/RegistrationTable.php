@@ -58,8 +58,7 @@ class RegistrationTable
 	$resultSet = new ResultSet();
         $resultSet->initialize($statement->execute());
 	if($resultSet->count()){
-	    echo "Hey!! You are already Registered. Go and Login";
-	    return false;
+	    return $msg = "Hey!! You are already Registered. Go and ";
 	}else{
 	    $sql = new Sql($dbAdapter, 'registration');
             $insert = $sql->insert();
@@ -86,7 +85,9 @@ class RegistrationTable
 		  ));
 		$statement = $sql1->prepareStatementForSqlObject($insert);
 		$results = $statement->execute();
-		return $results;
+		if($results){
+		    return array('msg' => "Well done! You are successfully Registered.Now Go and ");
+		}
 	   }
 	}
 //        $adapter = new AuthAdapter(

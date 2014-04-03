@@ -9,6 +9,7 @@ use Zend\Db\TableGateway\TableGateway;
 use Auth\Model\Auth;
 use Auth\Form\AuthForm;
 
+use Auth\Model\UserTable;
 use Auth\Model\Registration;
 use Auth\Form\RegistrationForm;
 
@@ -25,6 +26,7 @@ class AuthController extends AbstractActionController
 {
 	protected $authTable = null;
 	protected $registrationTable = null;
+	protected $userTable = null;
  	
         public function authAction()
         { 
@@ -43,7 +45,7 @@ class AuthController extends AbstractActionController
 		    $userdetail = $this->getAuthTable()->authauth($auth);
 		   // print_r($userdetail);
 		   //return array('userdetail' => $userdetail,'authform' => $authform);
-		   if($userdetail){
+		   if(is_object($userdetail)){
 		        $populateStorage = array('id' => $userdetail->id, 'username' => $userdetail->username);
 			$storage         = new ArrayStorage($populateStorage);
 			$manager         = new SessionManager();
@@ -54,7 +56,10 @@ class AuthController extends AbstractActionController
 			$session->offsetSet('username', $userdetail->username);
 			$session->offsetSet('id', $userdetail->id);
 			$session->offsetSet('email', $userdetail->email);
-		   }	
+		   }else{
+			
+			return array('errormsg'=>$userdetail,'authform' => $authform);
+		   }
 		}
 	     }
 	   
@@ -67,6 +72,10 @@ class AuthController extends AbstractActionController
 	   $session = new Container('base');	
 	   if(!isset($_SESSION['base']['username'])){
 		return $this->redirect()->toRoute('auth');
+	     }else{
+		 $usertable = new UserTable();
+		 $userdetail = $usertable->fetchUserDetail($_SESSION['base']['id']);
+		 return array('userdetail'=> $userdetail);
 	     }
         }
 	
@@ -83,8 +92,10 @@ class AuthController extends AbstractActionController
 		if($registrationform->isValid()){
 			 $registration->exchangeArray($registrationform->getData());
 			 $result = $this->getRegistrationTable()->saveregistration($registration);
-			if($result){
-				return $this->redirect()->toRoute('auth');
+			if(is_array($result)){
+				 return array('successmsg'=> $result['msg'],'registrationform' => $registrationform);
+			}else{
+			   return array('errormsg'=> $result,'registrationform' => $registrationform);
 			}
 
 		}
@@ -117,5 +128,16 @@ class AuthController extends AbstractActionController
 	    }
 	    return $this->registrationTable;
 	}
+	
+	public function getUserTable()
+	{
+	    if (!$this->userTable) {
+	       $sm = $this->getServiceLocator();
+	       $this->userTable = $sm->get('Auth\Model\UserTable');
+   
+	    }
+	    return $this->userTable;
+	}
+	
 	
 }

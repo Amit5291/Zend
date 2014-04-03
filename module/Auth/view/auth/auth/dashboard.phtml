@@ -1,11 +1,13 @@
 
  <?php
+ 
  if(!isset($_SESSION['base']['username'])){
-       header("Location:https://www.google.com");
+     
     }else{
       ?> <h1>You Can see me !!</h1> <?php
-      echo "<h2>Welcome ".$_SESSION['base']['username']."</h2>";
-      echo "<h3>Your Email is <span style='color:#c0f'>".$_SESSION['base']['email']."</span></h3>";
+       echo "<h2>Your FulL Name is <span class='label label-danger'>".$this->escapeHtml($userdetail->fullname)."</span></h2>";
+       echo "<h3>Your Email is <span class='label label-success'>".$this->escapeHtml($userdetail->email)."</span></h3>";
+       echo "<h3>Your DOB is <span class='label label-warning'>".$this->escapeHtml($userdetail->dob)."</span></h3>";
     ?>
   <a href="<?php echo $this->url('auth',
              array('action'=>'logout'));?>">Log Out</a>

@@ -53,11 +53,11 @@ class AuthTable
 	    switch ($result->getCode()) {
 
 	    case Result::FAILURE_IDENTITY_NOT_FOUND:
-		echo "Username or password is wrong";
+		return $msg = "Either Username or Password is wrong";
 		break;
 	
 	    case Result::FAILURE_CREDENTIAL_INVALID:
-		echo "Username or password is wrong";
+		return $msg = "Either Username or Password is wrong";
 		break;
 	
 	    case Result::SUCCESS:

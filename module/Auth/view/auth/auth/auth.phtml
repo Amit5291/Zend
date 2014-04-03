@@ -4,11 +4,14 @@
  if(!isset($_SESSION['base']['username'])){
     $authform->setAttribute('action', $this->url('auth', array('action' => '')));
     $authform->prepare();
- ?> <h1>You Can't see me !!</h1>  <?php   
+ ?> <h1>You Can't see me !!</h1>  <?php
  echo $this->form()->openTag($authform);
  ?>
  <div class="well">
-  <div align="right">  
+  <div align="right">
+    <?php if($this->errormsg !=""){ ?>
+  <div class="alert alert-danger"> <?php echo $this->escapeHtml($errormsg); ?></div>
+  <?php } ?>
  <table>
     <tr>
         <td><?php echo $this->formRow($authform->get('username')); ?></td>
@@ -16,13 +19,17 @@
     <tr>
         <td><?php echo $this->formRow($authform->get('password')); ?></td>
     </tr>
-    <tr>
-        <td><?php echo $this->formSubmit($authform->get('submit')); ?></td>
+     <tr>
+        <td><a href="<?php echo $this->url('auth',
+             array('action'=>'resetpassword'));?>">Forgot Password?</a><br/></td>
     </tr>
     <tr>
-        <td> Or <a href="<?php echo $this->url('auth',
-             array('action'=>'registration'));?>">Register Yourself</a><br/></td>
+        <td><?php echo $this->formSubmit($authform->get('submit')); ?>
+        Or <a href="<?php echo $this->url('auth',
+             array('action'=>'registration'));?>">Register Yourself</a>
+        </td>
     </tr>
+   
  </table>
  </div>
   </div>
