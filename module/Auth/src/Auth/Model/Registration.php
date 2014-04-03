@@ -78,6 +78,7 @@ class Registration implements InputFilterAwareInterface
                      ),
                  ),
              ));
+	     
             $inputFilter->add(array(
                  'name'     => 'email',
                  'required' => true,
@@ -124,8 +125,9 @@ class Registration implements InputFilterAwareInterface
                  ),
                  'validators' => array(
                      array(
-                         'name'    => 'StringLength',
+                         'name'    => 'Identical',
                          'options' => array(
+			     'token' => 'password', 
                              'encoding' => 'UTF-8',
                              'min'      => 4,
                              'max'      => 100,

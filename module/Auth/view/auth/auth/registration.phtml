@@ -1,6 +1,6 @@
- <script type="text/javascript">
+       <script type="text/javascript">
             $(document).ready(function(){
-              //  $('.datepicker').val('12/02/2012'); 
+              // $('.datepicker').val('02/05/1991'); 
                 $('.datepicker').datepicker();
               });
             
@@ -12,6 +12,8 @@
  ?> <h1>One Step away to see me !!</h1>  <?php   
  echo $this->form()->openTag($registrationform);
  ?>
+ <div class="well">
+  <div align="right">  
  <table>
     <tr>
         <td valign="top">Username:</td><td><?php echo $this->formRow($registrationform->get('username')); ?></td>
@@ -43,6 +45,8 @@
              array('action'=>''));?>">Sign In</a><br/></td>
     </tr>
  </table>
+  </div>
+ </div>
  <?php  }else{
       header('Cache-Control: max-age=900'); // to prevent document Expired
       ?> <h1>You Can see me !!</h1> <?php

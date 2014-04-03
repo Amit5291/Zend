@@ -7,6 +7,8 @@
  ?> <h1>You Can't see me !!</h1>  <?php   
  echo $this->form()->openTag($authform);
  ?>
+ <div class="well">
+  <div align="right">  
  <table>
     <tr>
         <td><?php echo $this->formRow($authform->get('username')); ?></td>
@@ -22,6 +24,8 @@
              array('action'=>'registration'));?>">Register Yourself</a><br/></td>
     </tr>
  </table>
+ </div>
+  </div>
  <?php  }else{
       header('Cache-Control: max-age=900'); // to prevent document Expired
       ?> <h1>You Can see me !!</h1> <?php

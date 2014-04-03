@@ -13,17 +13,20 @@ class AuthForm extends Form
             'name' => 'username',
             'attributes' => array(
                 'type'  => 'text',
-		'placeholder' => 'Username'
+		'placeholder' => 'Username',
+		'class' => 'form-control',
             ),
             'options' => array(
                 'label' => 'Username',
+		
             ),
         ));
         $this->add(array(
             'name' => 'password',
             'attributes' => array(
                 'type'  => 'password',
-		'placeholder' => 'Password'
+		'placeholder' => 'Password',
+		'class' => 'form-control',
             ),
             'options' => array(
                 'label' => 'Password',

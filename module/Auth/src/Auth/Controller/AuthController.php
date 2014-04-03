@@ -56,7 +56,7 @@ class AuthController extends AbstractActionController
 			$session->offsetSet('email', $userdetail->email);
 		   }	
 		}
-	   }
+	     }
 	   
 	   return array('authform' => $authform);
 	   
@@ -82,7 +82,7 @@ class AuthController extends AbstractActionController
 		
 		if($registrationform->isValid()){
 			 $registration->exchangeArray($registrationform->getData());
-			$result = $this->getRegistrationTable()->saveregistration($registration);
+			 $result = $this->getRegistrationTable()->saveregistration($registration);
 			if($result){
 				return $this->redirect()->toRoute('auth');
 			}

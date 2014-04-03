@@ -10,6 +10,11 @@ use Zend\Authentication\Result;
 
 use Zend\Db\Sql\Sql;
 use Zend\Db\Sql\Insert;
+use Zend\Db\Sql\Select;
+use Zend\Db\Adapter\Driver\ResultInterface;
+use Zend\Db\ResultSet\ResultSet;
+use Zend\Db\Sql\Predicate\PredicateSet as PredicateSet;
+use Zend\Db\Sql\Predicate\Operator as Operator;
 
 class RegistrationTable
 {
@@ -44,12 +49,23 @@ class RegistrationTable
 		'password' => 'root'
             ));
 	$reg_ip = $_SERVER['REMOTE_ADDR'];
-	$sql = new Sql($dbAdapter, 'registration');
 	
-        $insert = $sql->insert();
-	//$insert = new Insert('registration');
-	$insert->columns(array('fullname','email','dob','reg_ip','reg_date'));
-	$insert->values(array(
+	$sql_sel = new Sql($dbAdapter);
+	$select = $sql_sel->select();
+	$select->from('auth');
+	$select->where(array( new PredicateSet( array( new Operator('username', Operator::OPERATOR_EQUAL_TO, $username), new Operator('email', Operator::OPERATOR_EQUAL_TO, $email), ), PredicateSet::COMBINED_BY_OR ) ));
+	$statement = $sql_sel->prepareStatementForSqlObject($select);
+	$resultSet = new ResultSet();
+        $resultSet->initialize($statement->execute());
+	if($resultSet->count()){
+	    echo "Hey!! You are already Registered. Go and Login";
+	    return false;
+	}else{
+	    $sql = new Sql($dbAdapter, 'registration');
+            $insert = $sql->insert();
+	    
+            $insert->columns(array('fullname','email','dob','reg_ip','reg_date'));
+        	$insert->values(array(
 		'fullname' => $fullname,
 		'email' => $email,
 		'dob' => $dob,
@@ -71,7 +87,8 @@ class RegistrationTable
 		$statement = $sql1->prepareStatementForSqlObject($insert);
 		$results = $statement->execute();
 		return $results;
-	 }
+	   }
+	}
 //        $adapter = new AuthAdapter(
 //                $dbAdapter,
 //                'auth',
@@ -88,7 +105,7 @@ class RegistrationTable
 //	    
 //            $auth = new AuthenticationService();
 //            $result = $auth->authenticate($adapter);
-//	    switch ($result->getCode()) {
+//	      switch ($result->getCode()) {
 //
 //	    case Result::FAILURE_IDENTITY_NOT_FOUND:
 //		echo "Username or password is wrong";

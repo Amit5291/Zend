@@ -65,6 +65,10 @@ class AuthTable
 		 $columnsToReturn = array(
 		'id', 'username', 'email'
 	          );
+		 
+	//	   $sql_sel = new Sql($dbAdapter, 'registration');
+	//         $select = $sql->select();
+	//         $select->from('registration')->where('username ='. $username);
 	        return $rowset = $adapter->getResultRowObject($columnsToReturn);
 		
 		
