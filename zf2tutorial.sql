@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 01, 2014 at 04:44 PM
+-- Generation Time: Apr 07, 2014 at 06:14 PM
 -- Server version: 5.5.35
 -- PHP Version: 5.3.10-1ubuntu3.10
 
@@ -86,17 +86,18 @@ CREATE TABLE IF NOT EXISTS `auth` (
   `email` varchar(50) NOT NULL,
   `password` char(128) NOT NULL,
   KEY `id` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `auth`
 --
 
 INSERT INTO `auth` (`id`, `username`, `email`, `password`) VALUES
-(1, 'amit123', 'amit@gmail.com', 'd404559f602eab6fd602ac7680dacbfaadd13630335e951f097af3900e9de176b6db28512f2e000b9d04fba5133e8b1c6e8df59db3a8ab9d60be4b97cc9e81db'),
-(2, 'amit', 'amitkushwaha@singsys.com', '5b722b307fce6c944905d132691d5e4a2214b7fe92b738920eb3fce3a90420a19511c3010a0e7712b054daef5b57bad59ecbd93b3280f210578f547f4aed4d25'),
-(3, 'vineet', 'vineet@singsys.com', 'aeab30864c8185ec5ac510c9e4006b88b870543715873d37c7fcc44d5cd82bf8e9a032fe72d5ea28dfdfb287afc05152b72228a971e6fb2cee7600c7736ce192'),
-(4, 'vineet123', 'vineet@singsys.com', 'aeab30864c8185ec5ac510c9e4006b88b870543715873d37c7fcc44d5cd82bf8e9a032fe72d5ea28dfdfb287afc05152b72228a971e6fb2cee7600c7736ce192');
+(1, 'Amit', 'amitkushwaha@singsys.com', '5b722b307fce6c944905d132691d5e4a2214b7fe92b738920eb3fce3a90420a19511c3010a0e7712b054daef5b57bad59ecbd93b3280f210578f547f4aed4d25'),
+(2, 'Arjun', 'arj.gpt@gmail.com', '5b722b307fce6c944905d132691d5e4a2214b7fe92b738920eb3fce3a90420a19511c3010a0e7712b054daef5b57bad59ecbd93b3280f210578f547f4aed4d25'),
+(3, 'Amberish', 'amberish@singsys.com', '5b722b307fce6c944905d132691d5e4a2214b7fe92b738920eb3fce3a90420a19511c3010a0e7712b054daef5b57bad59ecbd93b3280f210578f547f4aed4d25'),
+(4, 'Vineet', 'vineet@singsys.com', '5b722b307fce6c944905d132691d5e4a2214b7fe92b738920eb3fce3a90420a19511c3010a0e7712b054daef5b57bad59ecbd93b3280f210578f547f4aed4d25'),
+(5, 'Pravin', 'pravin@mail.com', '5b722b307fce6c944905d132691d5e4a2214b7fe92b738920eb3fce3a90420a19511c3010a0e7712b054daef5b57bad59ecbd93b3280f210578f547f4aed4d25');
 
 -- --------------------------------------------------------
 
@@ -134,22 +135,24 @@ INSERT INTO `forum` (`id`, `question`) VALUES
 CREATE TABLE IF NOT EXISTS `registration` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `fullname` varchar(50) NOT NULL,
+  `username` varchar(45) NOT NULL,
   `email` varchar(50) NOT NULL,
   `dob` varchar(12) NOT NULL,
   `reg_ip` varchar(20) NOT NULL,
   `reg_date` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `registration`
 --
 
-INSERT INTO `registration` (`id`, `fullname`, `email`, `dob`, `reg_ip`, `reg_date`) VALUES
-(1, 'amit kushwaha', 'amit@gmail.com', '04/24/2014', '127.0.0.1', '2014-04-01 16:32:29'),
-(2, 'amit kushwaha', 'amitkushwaha@singsys.com', '02/05/1991', '127.0.0.1', '2014-04-01 16:33:30'),
-(3, 'Vineet Pal', 'vineet@singsys.com', '03/11/1987', '127.0.0.1', '2014-04-01 16:38:50'),
-(4, 'Vineet Pal', 'vineet@singsys.com', '03/11/1987', '127.0.0.1', '2014-04-01 16:40:19');
+INSERT INTO `registration` (`id`, `fullname`, `username`, `email`, `dob`, `reg_ip`, `reg_date`) VALUES
+(1, 'Amit Kushwaha', 'Amit', 'amitkushwaha@singsys.com', '05/02/1991', '127.0.0.1', '2014-04-03 14:30:11'),
+(2, 'Arjun Gupta', 'Arjun', 'arj.gpt@gmail.com', '20/10/1990', '127.0.0.1', '2014-04-03 15:23:39'),
+(3, 'Amberish Raj', 'Amberish', 'amberish@singsys.com', '18/06/1990', '127.0.0.1', '2014-04-03 16:13:39'),
+(4, 'Vineet Pal', 'Vineet', 'vineet@singsys.com', '05/02/1991', '127.0.0.1', '2014-04-03 16:14:24'),
+(5, 'Pravin Mishra', 'Pravin', 'pravin@mail.com', '13/05/1991', '127.0.0.1', '2014-04-07 17:51:55');
 
 -- --------------------------------------------------------
 

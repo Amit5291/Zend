@@ -1,0 +1,15 @@
+<?php
+ include_once "header.phtml";
+echo "<table class='table'>";
+if($searchresult != ""){
+ foreach($searchresult as $values){
+  echo "<tr>";  
+  ?>
+   <td><a href="<?php echo $this->url('auth',
+             array('action'=>'user','id'=>$values->username));?>"><?php echo $values->fullname; ?></a></td>
+  <?php        
+  echo "</tr>";
+ }
+}
+ echo "</table>";
+?>

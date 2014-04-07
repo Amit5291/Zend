@@ -63,9 +63,10 @@ class RegistrationTable
 	    $sql = new Sql($dbAdapter, 'registration');
             $insert = $sql->insert();
 	    
-            $insert->columns(array('fullname','email','dob','reg_ip','reg_date'));
+            $insert->columns(array('fullname','username','email','dob','reg_ip','reg_date'));
         	$insert->values(array(
 		'fullname' => $fullname,
+		'username' => $username,
 		'email' => $email,
 		'dob' => $dob,
 		'reg_ip' => $reg_ip,

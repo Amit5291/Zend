@@ -10,6 +10,7 @@ use Auth\Model\Auth;
 use Auth\Form\AuthForm;
 
 use Auth\Model\UserTable;
+
 use Auth\Model\Registration;
 use Auth\Form\RegistrationForm;
 
@@ -27,7 +28,9 @@ class AuthController extends AbstractActionController
 	protected $authTable = null;
 	protected $registrationTable = null;
 	protected $userTable = null;
- 	
+ 	function __construct(){
+		
+	}
         public function authAction()
         { 
 	   $authform = new AuthForm();
@@ -40,7 +43,6 @@ class AuthController extends AbstractActionController
 		$authform->setData($request->getPost());
 		
 		if($authform->isValid()){
-	
 		    $auth->exchangeArray($authform->getData());
 		    $userdetail = $this->getAuthTable()->authauth($auth);
 		   // print_r($userdetail);
@@ -51,8 +53,6 @@ class AuthController extends AbstractActionController
 			$manager         = new SessionManager();
 			$manager->setStorage($storage);
 			$manager->getValidatorChain()->attach('session.validate', array(new HttpUserAgent(), 'isValid'));
-			//print_r($storage);
-			//print_r($manager);
 			$session->offsetSet('username', $userdetail->username);
 			$session->offsetSet('id', $userdetail->id);
 			$session->offsetSet('email', $userdetail->email);
@@ -67,15 +67,19 @@ class AuthController extends AbstractActionController
 	   
         }
 	
-	public function dashboardAction()
+	public function userAction()
         {
+	   $user = $this->params()->fromRoute('id', 0);
+	    if (!$user) {
+             return $this->redirect()->toRoute('auth');
+            }
 	   $session = new Container('base');	
 	   if(!isset($_SESSION['base']['username'])){
 		return $this->redirect()->toRoute('auth');
 	     }else{
 		 $usertable = new UserTable();
-		 $userdetail = $usertable->fetchUserDetail($_SESSION['base']['id']);
-		 return array('userdetail'=> $userdetail);
+		 $userdetail = $usertable->fetchUserDetail($user);
+		 return array('userdetail'=> $userdetail, 'user'=>$user);
 	     }
         }
 	
@@ -102,6 +106,21 @@ class AuthController extends AbstractActionController
 	     }
 	    return array('registrationform' => $registrationform);
         }
+	
+	public function searchAction(){
+		 $session = new Container('base');	
+		$searchresult = "";
+		$request = $this->getRequest();
+		if($request->isPost()){
+		     //print_r($request->getPost());
+		     $searchItem = $request->getPost()->searchitem;
+		      $usertable = new UserTable();
+		     $searchresult = $usertable->fetchSearchResult($searchItem);
+		      return array('searchresult'=> $searchresult);
+		     
+		}
+		  return array('searchresult'=> $searchresult);
+	}
 	
 	public function logoutAction(){
 	   	$session = new Container('base');
@@ -137,7 +156,5 @@ class AuthController extends AbstractActionController
    
 	    }
 	    return $this->userTable;
-	}
-	
-	
+	}	
 }

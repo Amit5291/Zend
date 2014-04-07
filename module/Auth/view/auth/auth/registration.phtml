@@ -2,12 +2,13 @@
             $(document).ready(function(){
               $('.datepicker').val('05/02/1991'); 
                 $('.datepicker').datepicker({
-                                              format: 'dd/mm/yyyy',
+                               format: 'dd/mm/yyyy',
                       });
               });
             
          </script>
  <?php
+ include_once "header.phtml";
  if(!isset($_SESSION['base']['username'])){
     $registrationform->setAttribute('action', $this->url('auth', array('action' => 'registration')));
     $registrationform->prepare();

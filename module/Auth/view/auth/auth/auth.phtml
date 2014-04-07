@@ -1,6 +1,5 @@
-
  <?php
- 
+ include_once "header.phtml";
  if(!isset($_SESSION['base']['username'])){
     $authform->setAttribute('action', $this->url('auth', array('action' => '')));
     $authform->prepare();
@@ -39,9 +38,6 @@
      echo "<h2>Welcome ".$_SESSION['base']['username']."</h2>";
     ?>
     <a href="<?php echo $this->url('auth',
-             array('action'=>'dashboard'));?>">Check Your Details</a><br/>
-    
-     <a href="<?php echo $this->url('auth',
-             array('action'=>'logout'));?>">Log Out</a>
+             array('action'=>'user','id'=>$_SESSION['base']['username']));?>">Check Your Details</a><br/>
     
  <?php } ?>

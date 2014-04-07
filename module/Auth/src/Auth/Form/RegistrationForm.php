@@ -8,7 +8,6 @@ class RegistrationForm extends Form
     public function __construct($name = null)
     {
         parent::__construct('auth');
-
         $this->add(array(
             'name' => 'username',
             'attributes' => array(
