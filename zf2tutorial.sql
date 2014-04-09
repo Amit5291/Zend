@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 07, 2014 at 06:14 PM
+-- Generation Time: Apr 09, 2014 at 06:48 PM
 -- Server version: 5.5.35
 -- PHP Version: 5.3.10-1ubuntu3.10
 
@@ -19,6 +19,29 @@ SET time_zone = "+00:00";
 --
 -- Database: `zf2tutorial`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `addrequest`
+--
+
+CREATE TABLE IF NOT EXISTS `addrequest` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `sender_id` int(10) NOT NULL,
+  `receiver_id` int(10) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+--
+-- Dumping data for table `addrequest`
+--
+
+INSERT INTO `addrequest` (`id`, `sender_id`, `receiver_id`) VALUES
+(1, 1, 5),
+(2, 1, 3),
+(3, 2, 1),
+(4, 2, 3);
 
 -- --------------------------------------------------------
 

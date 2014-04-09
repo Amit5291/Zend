@@ -37,7 +37,7 @@
       ?> <h1>You Can see me !!</h1> <?php
      echo "<h2>Welcome ".$_SESSION['base']['username']."</h2>";
     ?>
-    <a href="<?php echo $this->url('auth',
+    <a href="<?php echo $this->url('profile',
              array('action'=>'user','id'=>$_SESSION['base']['username']));?>">Check Your Details</a><br/>
     
  <?php } ?>

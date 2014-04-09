@@ -9,7 +9,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="<?php echo $this->url('auth'); ?>">My World</a>
+      <a class="navbar-brand" href="<?php echo $this->url('home') ?>">My World</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -20,16 +20,6 @@
         </div>
           <button type="submit" id="submitsearch" class="btn btn-success">Search</button>
       </form>
-      <ul class="nav navbar-nav">
-        <?php if(isset($_SESSION['base']['username'])){ ?>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" id="get-request" data-toggle="dropdown">Requests<b class="caret"></b></a>
-          <ul class="dropdown-menu" id="show-request">
-           
-          </ul>
-        </li>
-        <?php }?>
-      </ul>
       <ul class="nav navbar-nav navbar-right">
         <?php if(isset($_SESSION['base']['username'])){ ?>
         <li class="dropdown">

@@ -5,7 +5,7 @@ if($searchresult != ""){
  foreach($searchresult as $values){
   echo "<tr>";  
   ?>
-   <td><a href="<?php echo $this->url('auth',
+   <td><a href="<?php echo $this->url('profile',
              array('action'=>'user','id'=>$values->username));?>"><?php echo $values->fullname; ?></a></td>
   <?php        
   echo "</tr>";

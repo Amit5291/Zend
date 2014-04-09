@@ -67,21 +67,7 @@ class AuthController extends AbstractActionController
 	   
         }
 	
-	public function userAction()
-        {
-	   $user = $this->params()->fromRoute('id', 0);
-	    if (!$user) {
-             return $this->redirect()->toRoute('auth');
-            }
-	   $session = new Container('base');	
-	   if(!isset($_SESSION['base']['username'])){
-		return $this->redirect()->toRoute('auth');
-	     }else{
-		 $usertable = new UserTable();
-		 $userdetail = $usertable->fetchUserDetail($user);
-		 return array('userdetail'=> $userdetail, 'user'=>$user);
-	     }
-        }
+	
 	
 	public function registrationAction()
         {
@@ -109,8 +95,8 @@ class AuthController extends AbstractActionController
 	
 	public function searchAction(){
 		 $session = new Container('base');	
-		$searchresult = "";
-		$request = $this->getRequest();
+		 $searchresult = "";
+		 $request = $this->getRequest();
 		if($request->isPost()){
 		     //print_r($request->getPost());
 		     $searchItem = $request->getPost()->searchitem;
@@ -133,7 +119,6 @@ class AuthController extends AbstractActionController
 	    if (!$this->authTable) {
 	       $sm = $this->getServiceLocator();
 	       $this->authTable = $sm->get('Auth\Model\AuthTable');
-   
 	    }
 	    return $this->authTable;
 	}
@@ -148,13 +133,5 @@ class AuthController extends AbstractActionController
 	    return $this->registrationTable;
 	}
 	
-	public function getUserTable()
-	{
-	    if (!$this->userTable) {
-	       $sm = $this->getServiceLocator();
-	       $this->userTable = $sm->get('Auth\Model\UserTable');
-   
-	    }
-	    return $this->userTable;
-	}	
+	
 }

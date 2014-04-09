@@ -1,0 +1,25 @@
+
+ <?php
+  include_once __DIR__."/../auth/header.phtml";
+ if(!isset($_SESSION['base']['username'])){
+     
+    }else if($userdetail !=""){
+      ?> <h1>You Can see me !!</h1> <?php
+       echo "<h4>Your FulL Name is <span class='label label-danger'>".$this->escapeHtml($userdetail->fullname)."</span></h4>";
+       echo "<h4>Your Email is <span class='label label-success'>".$this->escapeHtml($userdetail->email)."</span></h4>";
+       echo "<h4>Your DOB is <span class='label label-warning'>".$this->escapeHtml($userdetail->dob)."</span></h4>";
+    ?>
+   <?php if($_SESSION['base']['username'] == $this->escapeHtml($user)) { ?>
+     <a href="<?php echo $this->url('auth',
+             array('action'=>'edit','id'=>$_SESSION['base']['username']));?>">Edit Your Details</a><br/>
+     
+    <?php }else{ ?>
+    <form method="post">
+     <input type="hidden" id="user-id" value="<?php echo $this->escapeHtml($userdetail->id);  ?>" />
+     <input type="button" class="btn btn-default" id="add-user" value="<?php echo $this->escapeHtml($status);  ?>" />
+    </form>
+    <?php
+      }
+    }else{ echo "User Not Found"; } ?>
+    
+    
