@@ -7,8 +7,10 @@ $(document).ready(function(){
               $.post("../../profile/add",{ id : id},function(data){
               $("#add-user").val(data);  
             });
-         }else{
-           alert("Already sent");
+         }else if(status == "Accept Request"){
+              $.post("../../profile/accept",{ id : id },function(data){
+              $("#add-user").val(data);
+              }); 
            }
         });
      //----------------------------------------------------------------
