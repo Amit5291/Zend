@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 09, 2014 at 06:48 PM
+-- Generation Time: Apr 10, 2014 at 12:43 PM
 -- Server version: 5.5.35
 -- PHP Version: 5.3.10-1ubuntu3.10
 
@@ -31,17 +31,7 @@ CREATE TABLE IF NOT EXISTS `addrequest` (
   `sender_id` int(10) NOT NULL,
   `receiver_id` int(10) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
-
---
--- Dumping data for table `addrequest`
---
-
-INSERT INTO `addrequest` (`id`, `sender_id`, `receiver_id`) VALUES
-(1, 1, 5),
-(2, 1, 3),
-(3, 2, 1),
-(4, 2, 3);
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 -- --------------------------------------------------------
 
@@ -148,6 +138,35 @@ INSERT INTO `forum` (`id`, `question`) VALUES
 (7, 'sfsf'),
 (8, 'wdknsdkw'),
 (9, 'hgfhgh');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `friendlist`
+--
+
+CREATE TABLE IF NOT EXISTS `friendlist` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `user_id` int(10) NOT NULL,
+  `friend_id` int(10) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+
+--
+-- Dumping data for table `friendlist`
+--
+
+INSERT INTO `friendlist` (`id`, `user_id`, `friend_id`) VALUES
+(1, 1, 3),
+(2, 3, 1),
+(3, 2, 3),
+(4, 3, 2),
+(5, 5, 1),
+(6, 1, 5),
+(7, 2, 1),
+(8, 1, 2),
+(9, 5, 2),
+(10, 2, 5);
 
 -- --------------------------------------------------------
 

@@ -39,5 +39,12 @@
     ?>
     <a href="<?php echo $this->url('profile',
              array('action'=>'user','id'=>$_SESSION['base']['username']));?>">Check Your Details</a><br/>
-    
+    <h3>Friend List</h3>
+    <ul>
+    <?php foreach($friendlist as $val){ ?>
+         
+        <li><a href="<?php echo $this->url('profile',
+             array('action'=>'user','id'=> $val[1]));?>"><?php echo $val[0] ?></a></li>
+        <?php }  ?>
+    </ul>    
  <?php } ?>

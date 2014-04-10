@@ -8,6 +8,7 @@
  use Zend\Db\Sql\Sql;
  use Zend\Db\Sql\Select;
  use Zend\Db\Sql\Insert;
+  use Zend\Db\Sql\Delete;
  use Zend\Db\Sql\Where;
  use Zend\Db\Adapter\Driver\ResultInterface;
  use Zend\Db\ResultSet\ResultSet;
@@ -53,7 +54,17 @@
               if($resultSet_2->count() == 1){
                    $status = "Accept Request";
                 }else{
-                   $status = "Add User";
+                  $select_2 = $sql_sel->select();
+                   $select_2->from('friendlist');
+                   $select_2->where(array('user_id'=> $_SESSION['base']['id'],'friend_id'=> $resultSet->current()->id));
+                   $statement_2 = $sql_sel->prepareStatementForSqlObject($select_2);
+                   $resultSet_2 = new ResultSet();
+                   $resultSet_2->initialize($statement_2->execute());
+                   if($resultSet_2->count() == 1){
+                        $status = "Friends";
+                     }else{
+                        $status = "Add User";
+                     }
                 }
               
              }
@@ -121,13 +132,13 @@
 		'password' => 'root'
             ));
          $sql_sel = new Sql($dbAdapter);
-        $select = $sql_sel->select();
-	$select->from('addrequest');
-        $select->where(array('receiver_id'=>$_SESSION['base']['id']));
-        $statement = $sql_sel->prepareStatementForSqlObject($select);
-	$resultSet = new ResultSet();
-        $resultSet->initialize($statement->execute());
-        foreach ($resultSet as $row) {
+         $select = $sql_sel->select();
+	 $select->from('addrequest');
+         $select->where(array('receiver_id'=>$_SESSION['base']['id']));
+         $statement = $sql_sel->prepareStatementForSqlObject($select);
+	 $resultSet = new ResultSet();
+         $resultSet->initialize($statement->execute());
+         foreach ($resultSet as $row) {
            //array_push($resultArr,$row);
               $sql  = new Sql($dbAdapter);
               $select = $sql->select();
@@ -137,9 +148,52 @@
               $resultSet_1 = new ResultSet();
               $resultSet_1->initialize($statement->execute()); 
                array_push($resultArr,$resultSet_1->current()->fullname);
-                $html .="<li><a href='/'".$resultSet_1->current()->username."'>".$resultSet_1->current()->fullname."</a></li><li class='divider'></li>";
+                $url = "http://zend.localhost/profile/user/".$resultSet_1->current()->username;
+                $html .="<li><a href='".$url."'>".$resultSet_1->current()->fullname."</a></li><li class='divider'></li>";
              }
-          
-            return $html;
+            if($html == ''){
+               return "<li>No Requests</li>";
+            }else{
+              return $html;
+            }
+           
       }
+      
+        public function acceptRequest($id){
+       $session = new Container('base');	
+           $dbAdapter = new DbAdapter(array(
+                'driver' => 'Pdo_Mysql',
+                'database' => 'zf2tutorial',
+		'username' => 'root',
+		'password' => 'root'
+            ));
+      $sql = new Sql($dbAdapter,'friendlist');
+        $insert = $sql->insert();
+        $insert->columns(array('sender_id', 'receiver_id'));
+        $insert->values(array('user_id'=>$_SESSION['base']['id'],  'friend_id'=>$id));
+        $statement = $sql->prepareStatementForSqlObject($insert);
+         $results = $statement->execute();
+         
+         if($results){
+                $sql = new Sql($dbAdapter,'friendlist');
+                $insert = $sql->insert();
+                $insert->columns(array('sender_id', 'receiver_id'));
+                $insert->values(array('user_id'=> $id,  'friend_id'=>$_SESSION['base']['id']));
+                $statement = $sql->prepareStatementForSqlObject($insert);
+                $results = $statement->execute();
+                if($results){
+                 $sql = new Sql($dbAdapter);
+                 $delete = $sql->delete();
+                 $delete->from('addrequest');
+                 $delete->where(array('sender_id'=>$id,'receiver_id'=>$_SESSION['base']['id']));
+                 $statement = $sql->prepareStatementForSqlObject($delete);
+                 $results = $statement->execute();
+                if($results){
+                   return "Friends";
+                }
+             }
+            }
+         }
+     
  }
+    

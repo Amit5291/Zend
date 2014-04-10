@@ -61,7 +61,17 @@ class ProfileController extends AbstractActionController
                  return $this->getResponse()->setContent(($req_response));
               
             }              
-    
+    public function acceptAction(){
+         $request = $this->getRequest();
+         $response = $this->getResponse();
+          if ($request->isPost()) {
+             $post_data = $request->getPost();
+              $user_id = $post_data['id'];
+                 $usertable = new UserTable();
+	         $req_response = $usertable->acceptRequest($user_id);
+                return $this->getResponse()->setContent($req_response);
+              }
+            }
     
   public function getUserTable()
 	{

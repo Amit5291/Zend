@@ -56,15 +56,19 @@ class AuthController extends AbstractActionController
 			$session->offsetSet('username', $userdetail->username);
 			$session->offsetSet('id', $userdetail->id);
 			$session->offsetSet('email', $userdetail->email);
+			
 		   }else{
 			
 			return array('errormsg'=>$userdetail,'authform' => $authform);
 		   }
 		}
 	     }
-	   
+	   if(isset($_SESSION['base']['username'])){  
+	   $friendlist = $this->getAuthTable()->getFriendlist($_SESSION['base']['id']);
+			return array('friendlist' => $friendlist);
+	   }else{
 	   return array('authform' => $authform);
-	   
+	   }
         }
 	
 	

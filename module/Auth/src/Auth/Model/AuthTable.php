@@ -7,6 +7,12 @@ use Zend\Authentication\Adapter\DbTable as AuthAdapter;
 use Zend\Db\Adapter\Adapter as DbAdapter;
 use Zend\Db\Authentication;
 use Zend\Authentication\Result;
+use Zend\Db\Sql\Sql;
+ use Zend\Db\Sql\Select;
+ use Zend\Db\Sql\Insert;
+  use Zend\Db\Sql\Delete;
+   use Zend\Db\Adapter\Driver\ResultInterface;
+ use Zend\Db\ResultSet\ResultSet;
 
 
 class AuthTable
@@ -86,5 +92,37 @@ class AuthTable
 //            throw new \Exception("Username and Password Combination is wrong");
 //        }
 //	return $rowset;
+    }
+    
+    public function getFriendlist($id){
+	$rowArr = array();
+	$resultArr = array();
+	$dbAdapter = new DbAdapter(array(
+                'driver' => 'Pdo_Mysql',
+                'database' => 'zf2tutorial',
+		'username' => 'root',
+		'password' => 'root'
+            ));
+	$sql_sel = new Sql($dbAdapter);
+        $select = $sql_sel->select();
+	$select->from('registration');
+	
+	$select->join(
+                'friendlist', // table name
+                'friendlist.friend_id = registration.id' // expression to join on (will be quoted by platform object before insertion),
+                //array('bar', 'baz'), // (optional) list of columns, same requirements as columns() above
+               // $select::JOIN_INNER // (optional), one of inner, outer, left, right also represented by constants in the API
+         );
+        $select->where('`friendlist`.`user_id` ='. $id);
+        $statement = $sql_sel->prepareStatementForSqlObject($select);
+	$resultSet = new ResultSet();
+        $resultSet->initialize($statement->execute());
+	foreach ($resultSet as $row) {
+	   array_push($rowArr,$row->fullname);
+	   array_push($rowArr,$row->username);
+	   array_push($resultArr,$rowArr);
+	   $rowArr = array();
+	}
+	return $resultArr;
     }
 }
